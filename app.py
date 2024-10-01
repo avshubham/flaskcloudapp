@@ -5,9 +5,9 @@ from trp import Document
 
 app = Flask(__name__)
 
-ACCESS_KEY_ID = "AKIA4VRC4PXZOY6XFF7E"
-ACCESS_SECRET_KEY = "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"
-BUCKET_NAME = "minicloudpro"
+ACCESS_KEY_ID = ""
+ACCESS_SECRET_KEY = ""
+BUCKET_NAME = ""
 
 s3 = boto3.client('s3',
                   aws_access_key_id=ACCESS_KEY_ID,
