@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="static/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    MiniProject
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!-- Fonts and icons -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+  <!-- CSS Files -->
+  <link href="static/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="static/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
+  <!-- CSS -->
+  <link href="static/demo/demo.css" rel="stylesheet" />
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f0f0f0;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      max-width: 400px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      width: 100%;
+      margin-top: 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .custom-file-upload {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      text-align: center;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .custom-file-upload:hover {
+      background-color: #0056b3;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .file-name-box {
+      background-color: #f8f9fa;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="card-header">
+        MINICLOUDPROJECT
+      </div>
+      <form action="/upload" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="file-upload" class="custom-file-upload">Choose a file to upload it to AWS S3</label>
+          <input id="file-upload" type="file" name="file" value="file">
+          <div class="file-name-box" id="file-name">No file chosen</div>
+        </div>
+        <input type="submit" name="upload" value="Upload" class="btn btn-primary">
+        <p>{{msg}}</p> <!-- Message after uploading -->
+      </form>
+      <hr>
+      <form action="/extract" method="post" enctype="multipart/form-data">
+        <input type="submit" name="extract" value="Extract" class="btn btn-success">
+        <p>{{extract_msg}}</p> <!-- Message after extraction -->
+      </form>
+      <div id="result">
+        {% for field in text %}
+        <p>{{ field[0] }}: {{ field[1] }}</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <script>
+    document.getElementById("file-upload").onchange = function() {
+      document.getElementById("file-name").innerHTML = this.files[0].name;
+    };
+  </script>
+</body>
+
+</html>
